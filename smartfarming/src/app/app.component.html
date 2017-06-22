@@ -1,0 +1,51 @@
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+
+<nav class="navbar navbar-inverse navbar-toggleable-md jh-navbar">
+  <div class="jh-logo-container float-left">
+    <a class="jh-navbar-toggler hidden-lg-up float-right" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
+      <i class="fa fa-bars"></i>
+    </a>
+    <a class="navbar-brand logo float-left" routerLink="/">
+      <span class="logo-img"></span>
+      <span class="navbar-title">Smartfarming</span>
+    </a>
+  </div>
+  <div class="navbar-collapse collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/">
+          <i class="fa fa-home" aria-hidden="true"></i>
+          <span>Übersicht</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+<chart [options]="options" style="width:80%; height: 600px; margin: 0 auto">
+  </chart>
+</div>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <form>
+      <div class="form-group">
+        <label for="sensor">Sensor</label>
+        <input [(ngModel)]="sensorId" name="sensor" class="form-control" id="sensor" placeholder="SensorId" >
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="loadSensorDataClick()">Submit</button>
+    </form>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+<div class="row">
+
+  <chart [options]="sensorOptions" style="width:80%; height: 600px; margin: 0 auto">
+    <series (hide)="onSeriesHide($event.context)">
+      <point (select)="onPointSelect($event.context)"></point>
+    </series>
+  </chart>
+</div>
